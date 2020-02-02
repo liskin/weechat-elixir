@@ -21,6 +21,18 @@ typedef struct client {
 	int fd;
 	struct t_hook *fd_hook;
 	char nodename[MAXNODELEN + 1];
+
+	// TODO: add mailbox, to store messages that are in-flight while we're
+	// synchronously handling callbacks
+	//
+	// or:
+	//
+	// two counters, one that records the highest-numbered request from erlang
+	// side, another that records the highest-numbered processed request;
+	// incoming requests are either processed, when we can, or just recorded
+	// if we're blocked processing a callback from weechat;
+	// we still may need to request a lock or something for synchronous
+	// communication to prevent late requests operating on freed pointers
 } client_t;
 
 static void client_free(client_t *client);
