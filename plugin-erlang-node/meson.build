@@ -17,8 +17,8 @@ shared_module(
   'erl',
   sources: 'main.c',
   dependencies: [
-    # weechat uses threads, make sure we enable threads here so ei knows
-    dependency('threads'),
+    dependency('glib-2.0'),
+    dependency('threads'), # weechat uses threads, make sure we enable threads here so ei knows
     dependency('weechat'),
     cc.find_library('ei', has_headers: ['ei.h']),
   ],
